@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
+// todo: Background to show movement
 {
     [SerializeField]
     private GameObject player;

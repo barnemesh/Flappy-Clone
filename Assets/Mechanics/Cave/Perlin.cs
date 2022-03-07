@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Perlin
 {
-    /**
+    /** todo: play with gridsize
      * Grid cells size
      */
-    private static int GRID_SIZE = 15;
+    private static int GRID_SIZE = 20;
 
     /**
      * Number used in pseudo random generation
