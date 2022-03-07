@@ -14,7 +14,7 @@ public class TerrainCreate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var parent = new GameObject();
+        var parent = new GameObject("Tiles");
         var xScale = tile.transform.localScale.x;
         for (var index = 0; index < tileCount; index++)
         {

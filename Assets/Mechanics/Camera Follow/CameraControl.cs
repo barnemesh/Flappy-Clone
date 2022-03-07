@@ -13,6 +13,7 @@ public class CameraControl : MonoBehaviour
 
     private float _yVel;
     
+    //todo: add border to the game screen
     void FixedUpdate()
     {
         var position = transform.position;

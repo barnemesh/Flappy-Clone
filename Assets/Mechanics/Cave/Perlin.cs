@@ -10,11 +10,6 @@ public class Perlin
     private static int GRID_SIZE = 15;
 
     /**
-     * Noise amplitude scale
-     */
-    private static int BUMP_SCALE = 3;
-
-    /**
      * Number used in pseudo random generation
      */
     private static double MAGIC_NUMBER = 43758.5453123;
@@ -89,7 +84,7 @@ public class Perlin
         float low = Mathf.Floor(x / GRID_SIZE);
         float high = low + 1;
         float distance = Mathf.Abs((x % GRID_SIZE) / GRID_SIZE);
-        return BUMP_SCALE * quinticInterpolation(
+        return quinticInterpolation(
             pseudoRandom(seed + low) * distance,
             pseudoRandom(seed + high) * (1 - distance),
             distance
@@ -111,6 +106,6 @@ public class Perlin
             Vector2.Dot(c - c_int3, random2(c_int3))
         };
 
-        return BUMP_SCALE * biquinticInterpolation(dot_product, c - c_int0);
+        return biquinticInterpolation(dot_product, c - c_int0);
     }
 }
