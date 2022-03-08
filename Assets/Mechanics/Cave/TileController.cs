@@ -26,7 +26,7 @@ public class TileController : MonoBehaviour
 
     private void SetHeightByNoise(float localScaleX)
     {
-        var p = Perlin.Perlin2D(new Vector2(localScaleX, Time.time / timeFactor), seed);
+        var p = Perlin.Perlin2D(new Vector2(localScaleX, Time.time / timeFactor));
         transform.position = new Vector2(localScaleX, p);
     }
 

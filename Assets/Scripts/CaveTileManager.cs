@@ -12,9 +12,6 @@ public class CaveTileManager : MonoBehaviour
     private GameObject tile;
 
     [SerializeField]
-    private GameObject obstacle;
-
-    [SerializeField]
     private int tileCount = 90;
 
     [SerializeField]
@@ -49,9 +46,6 @@ public class CaveTileManager : MonoBehaviour
     // private float _oldTimeFactor;
     // private float _targetTimeFactor;
     public int TileCount => tileCount;
-
-    public int Seed => seed;
-
     public float TimeFactor => timeFactor;
 
     public float BumpScale => bumpScale;
@@ -61,14 +55,19 @@ public class CaveTileManager : MonoBehaviour
     void Start()
     {
         // todo: play with the grid size?
-        Perlin.GRID_SIZE = gridSize;
-        float size = Camera.main.orthographicSize * (32f / 9f);
+        Perlin.GridSize = gridSize;
+        Perlin.SeedVector = seed * Vector2.one;
+        float size = Camera.main!.orthographicSize * (32f / 9f);
         var xScale = size / tileCount;
 
         for (var index = -TileCount / 2; index <= TileCount / 2; index++)
         {
             float localScaleX = index * xScale;
-            var cur = Instantiate(tile, new Vector3(localScaleX, 0, 0), Quaternion.identity, transform);
+            var cur = Instantiate(tile,
+                new Vector3(localScaleX, 0, 0),
+                Quaternion.identity,
+                transform
+            );
             var localScale = cur.transform.localScale;
             cur.transform.localScale = new Vector3(xScale, localScale.y, localScale.z);
             cur.name = $"Tile {index + TileCount / 2}";

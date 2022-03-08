@@ -5,10 +5,12 @@ using UnityEngine;
 public class CaveTileControl : MonoBehaviour
 {
     private CaveTileManager _manager;
+
     private void Start()
     {
-        _manager = transform.parent.GetComponent<CaveTileManager>();
-        SetHeightByNoise(transform.position.x);
+        Transform t = transform;
+        _manager = t.parent.GetComponent<CaveTileManager>();
+        SetHeightByNoise(t.position.x);
     }
 
     void FixedUpdate()
@@ -19,14 +21,14 @@ public class CaveTileControl : MonoBehaviour
 
     private void SetHeightByNoise(float localScaleX)
     {
-        var p = Perlin.Perlin2D(new Vector2(localScaleX, Time.time / _manager.TimeFactor), _manager.Seed);
+        var p = Perlin.Perlin2D(new Vector2(localScaleX, Time.time / _manager.TimeFactor));
         transform.position = new Vector2(localScaleX, _manager.BumpScale * p);
     }
 
     private void OnBecameInvisible()
     {
         var transform1 = transform;
-        float localScaleX = transform1.position.x + (_manager.TileCount) * transform1.localScale.x;
+        float localScaleX = transform1.position.x + _manager.TileCount * transform1.localScale.x;
         SetHeightByNoise(localScaleX);
     }
 }

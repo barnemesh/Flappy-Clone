@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
-// todo: Background to show movement
 {
+    // todo: Background to show movement
     [SerializeField]
     private GameObject player;
 
@@ -13,12 +13,16 @@ public class CameraControl : MonoBehaviour
     private float smoothTime = 0.2f;
 
     private float _yVel;
-    
-    //todo: add border to the game screen
+
     void FixedUpdate()
     {
         var position = transform.position;
-        float smoothPos = Mathf.SmoothDamp(position.x, player.transform.position.x, ref _yVel, smoothTime);
+        float smoothPos = Mathf.SmoothDamp(
+            position.x,
+            player.transform.position.x,
+            ref _yVel,
+            smoothTime
+        );
         position = new Vector3(smoothPos, position.y, position.z);
         transform.position = position;
     }

@@ -19,7 +19,12 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private TMP_Text scoreTMP;
 
+    [SerializeField]
+    private TMP_Text messageTMP;
+
     private Rigidbody2D _myRb;
+
+    private ParticleSystem _myPs;
 
     private bool _moving;
 
@@ -31,7 +36,8 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         _myRb = GetComponent<Rigidbody2D>();
-        // todo: start screen : "Press Space to start"
+        _myPs = GetComponent<ParticleSystem>();
+        messageTMP.text = "Press Space to start";
     }
 
     // Update is called once per frame
@@ -44,10 +50,11 @@ public class PlayerControl : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                // todo: add splashing effect
                 //refactor: merge this and normal Space
                 _moving = true;
+                messageTMP.text = "";
                 _myRb.velocity = new Vector2(xVelocity, speedImpulse);
+                _myPs.Emit(1);
             }
 
             return;
@@ -55,8 +62,8 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // todo: add splashing effect
             _myRb.velocity = new Vector2(xVelocity, speedImpulse);
+            _myPs.Emit(1);
         }
 
         scoreTMP.text = $"Score\n{Mathf.RoundToInt(transform.position.x)}";
@@ -79,11 +86,12 @@ public class PlayerControl : MonoBehaviour
         if (_gameEnded)
             return;
 
-        // todo: add splash at crash
+        _myPs.Emit(3);
         _gameEnded = true;
         _moving = false;
         _myRb.velocity = Vector2.zero;
-        // todo: end game: show score and restart
-        print($"Score: {Mathf.RoundToInt(transform.position.x)}");
+        _myRb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        messageTMP.text = $"Game Over!\nFinal Score: {Mathf.RoundToInt(transform.position.x)}";
+        // todo: end game: restart key
     }
 }
