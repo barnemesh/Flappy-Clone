@@ -21,15 +21,19 @@ public class CaveTileManager : MonoBehaviour
     private int seed = 8008135;
 
     [SerializeField]
-    [Range(1, 40)]
-    private float timeFactor = 1;
-    
+    private int gridSize = 100;
+
     [SerializeField]
-    [Range(0,5)]
+    [Range(0.001f, 40)]
+    private float timeFactor = 1;
+
+    [SerializeField]
+    [Range(0, 10)]
     private float bumpScale;
 
     private float _curBumpSpeed;
 
+    //todo: remove this: change to time factor is not consistently good.
     // [SerializeField]
     // [Range(0, 1)]
     // private float difficultyStep = 0.1f;
@@ -56,6 +60,8 @@ public class CaveTileManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // todo: play with the grid size?
+        Perlin.GRID_SIZE = gridSize;
         float size = Camera.main.orthographicSize * (32f / 9f);
         var xScale = size / tileCount;
 
@@ -74,9 +80,9 @@ public class CaveTileManager : MonoBehaviour
     {
         if (!player.Moving) // todo: switch to gameEnded
             return;
-        
-        bumpScale = Mathf.SmoothDamp(bumpScale, 5, ref _curBumpSpeed, 60f, 0.3f);
-        
+
+        bumpScale = Mathf.SmoothDamp(bumpScale, 10, ref _curBumpSpeed, 60f, 0.3f);
+
         //
         // if (_updateDifficulty)
         // {

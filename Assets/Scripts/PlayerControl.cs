@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,10 +15,14 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField]
     private float xVelocity = 8f;
-    
+
+    [SerializeField]
+    private TMP_Text scoreTMP;
+
     private Rigidbody2D _myRb;
 
     private bool _moving;
+
     private bool _gameEnded;
 
     public bool Moving => _moving;
@@ -26,6 +31,7 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         _myRb = GetComponent<Rigidbody2D>();
+        // todo: start screen : "Press Space to start"
     }
 
     // Update is called once per frame
@@ -36,11 +42,12 @@ public class PlayerControl : MonoBehaviour
 
         if (!Moving)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 // todo: add splashing effect
+                //refactor: merge this and normal Space
                 _moving = true;
-                _myRb.velocity = new Vector2(xVelocity, 0);
+                _myRb.velocity = new Vector2(xVelocity, speedImpulse);
             }
 
             return;
@@ -48,8 +55,11 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // todo: add splashing effect
             _myRb.velocity = new Vector2(xVelocity, speedImpulse);
         }
+
+        scoreTMP.text = $"Score\n{Mathf.RoundToInt(transform.position.x)}";
     }
 
     void FixedUpdate()

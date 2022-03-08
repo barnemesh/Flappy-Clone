@@ -7,7 +7,7 @@ public class Perlin
     /** todo: play with gridsize
      * Grid cells size
      */
-    private static int GRID_SIZE = 20;
+    public static int GRID_SIZE = 20;
 
     /**
      * Number used in pseudo random generation
@@ -93,19 +93,19 @@ public class Perlin
 
     public static float Perlin2D(Vector2 c, int seed)
     {
-        // Your implementation
-        Vector2 c_int0 = new Vector2(Mathf.Floor(c.x), Mathf.Floor(c.y));
-        Vector2 c_int1 = c_int0 + Vector2.right;
-        Vector2 c_int2 = c_int0 + Vector2.up;
-        Vector2 c_int3 = c_int0 + Vector2.one;
-
-        List<float> dot_product = new List<float>{
-            Vector2.Dot(c - c_int0, random2(c_int0)),
-            Vector2.Dot(c - c_int1, random2(c_int1)),
-            Vector2.Dot(c - c_int2, random2(c_int2)),
-            Vector2.Dot(c - c_int3, random2(c_int3))
+        // todo: Grid size isnt implemented on the 2d version!!!
+        Vector2 cINT0 = new Vector2(Mathf.Floor(c.x), Mathf.Floor(c.y));
+        Vector2 cINT1 = cINT0 + Vector2.right;
+        Vector2 cINT2 = cINT0 + Vector2.up;
+        Vector2 cINT3 = cINT0 + Vector2.one;
+        Vector2 seedVec = seed * Vector2.one;
+        List<float> dotProduct = new List<float>{
+            Vector2.Dot(c - cINT0, random2(seedVec + cINT0)),
+            Vector2.Dot(c - cINT1, random2(seedVec + cINT1)),
+            Vector2.Dot(c - cINT2, random2(seedVec + cINT2)),
+            Vector2.Dot(c - cINT3, random2(seedVec + cINT3))
         };
 
-        return biquinticInterpolation(dot_product, c - c_int0);
+        return biquinticInterpolation(dotProduct, c - cINT0);
     }
 }
