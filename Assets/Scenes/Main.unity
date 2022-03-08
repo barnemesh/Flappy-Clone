@@ -154,7 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1373983950}
   tile: {fileID: 733715891081392834, guid: 93456d3fae3754349ab80695c2e6c1b0, type: 3}
-  obstacle: {fileID: 0}
   tileCount: 80
   seed: 8008135
   gridSize: 3
@@ -674,7 +673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedImpulse: 9
   maxSpeed: 10
-  xVelocity: 3
+  xVelocity: 4.5
   scoreTMP: {fileID: 1070713663}
   messageTMP: {fileID: 2113845569}
 --- !u!50 &1373983951
