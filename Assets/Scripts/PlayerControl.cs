@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField]
     private TMP_Text messageTMP;
+
+    [SerializeField]
+    private GameObject resetButton;
 
     private Rigidbody2D _myRb;
 
@@ -92,6 +96,11 @@ public class PlayerControl : MonoBehaviour
         _myRb.velocity = Vector2.zero;
         _myRb.constraints = RigidbodyConstraints2D.FreezePositionX;
         messageTMP.text = $"Game Over!\nFinal Score: {Mathf.RoundToInt(transform.position.x)}";
-        // todo: end game: restart key
+        resetButton.SetActive(true);
+    }
+
+    public void ResetScene()
+    {
+        SceneManager.LoadScene(0);
     }
 }
