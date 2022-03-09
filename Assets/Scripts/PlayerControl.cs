@@ -48,7 +48,7 @@ public class PlayerControl : MonoBehaviour
 
         if (!Moving)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 //refactor: merge this and normal Space
                 _moving = true;
@@ -60,7 +60,7 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             _myRb.velocity = new Vector2(xVelocity, speedImpulse);
             _myPs.Emit(1);
